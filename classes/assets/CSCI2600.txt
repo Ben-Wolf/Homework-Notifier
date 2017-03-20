@@ -1,0 +1,6 @@
+hw4 : http://www.cs.rpi.edu/~thompw4/CSCI-2600/Spring2017/Homework/hw4.pdf
+hw2 : http://www.cs.rpi.edu/~thompw4/CSCI-2600/Spring2017/Homework/hw2.pdf
+hw3 : http://www.cs.rpi.edu/~thompw4/CSCI-2600/Spring2017/Homework/hw3.pdf
+hw0 : http://www.cs.rpi.edu/~thompw4/CSCI-2600/Spring2017/Homework/hw0.pdf
+hw1 : http://www.cs.rpi.edu/~thompw4/CSCI-2600/Spring2017/Homework/hw1.pdf
+

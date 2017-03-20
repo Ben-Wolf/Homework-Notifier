@@ -1,18 +1,10 @@
-import csci2300, csci2600, shelve, sys, holder, emailer
-import smtplib
-from email.MIMEMultipart import MIMEMultipart
-from email.MIMEText import MIMEText
+import csci2300, csci2600, shelve, sys, holder, emailer, time
 
 def main():
-    # Check Algos for new assignments
-    algos = csci2300.Csci2300()
-    set2300 = algos.checkData()
-
-    # Check PSoft for new assignments
-    psoft = csci2600.Csci2600()
-    set2600 = psoft.checkData()
+    test = False
 
     if len(sys.argv) == 2:
+        # Add a user to the database
         if (sys.argv[1] == "-add"):
             email = raw_input("Enter user email --> ")
             classes = []
@@ -22,7 +14,6 @@ def main():
                 if (x == '2300' or x == '2600'):
                     classes.append(x)
                 elif (x == '-1'):
-                    print "Exiting loop...\n"
                     break
                 else:
                     print "Invalid choice: '-1' to exit..."
@@ -34,6 +25,33 @@ def main():
             x['data'] = data
             x.close()
 
+            print "%s added to database, please rerun." %email
+            sys.exit()
+
+        # Reset the contents of the database
+        if (sys.argv[1] == "-reset"):
+            x = shelve.open('users.db')
+            x['data'] = {}
+            x.close()
+
+        # Get contents of database
+        if (sys.argv[1] == "-get"):
+            x = shelve.open('users.db')
+            if (x['data']):
+                for key in x['data']:
+                    print key
+            x.close()
+            sys.exit()
+
+        # Returns all possible commands
+        if (sys.argv[1] == "-help"):
+            print "Recognized commands:\n"
+            print "'-add' to add a new user to the database"
+            print "'-get' to get all the users in the database"
+            print "'-reset' to reset the contents of the database"
+            print "'-test' to send a test email to all users"
+            sys.exit()
+
     x = shelve.open('users.db')
 
     # Error checking: If no key 'data' in shelf, create empty dataset
@@ -44,22 +62,30 @@ def main():
     data = x['data']
     x.close()
 
-    for key in data:
-        emailer.Emailer(key, data[key], set2300, set2600).sendEmail()
+    if len(sys.argv) == 2:
+        # Send test email
+        if (sys.argv[1] == "-test"):
+            test = True
+            for key in data:
+                emailer.Emailer(key, data[key], {}, {}, test).sendEmail()
+            sys.exit()
 
-    if len(data) == 0:
-        print "No users, please run with '-add' flag"
+    while(True):
+        # Check Algos for new assignments
+        algos = csci2300.Csci2300()
+        set2300 = algos.checkData()
+        algos.addData()
 
-    if len(set2600) == 0:
-        print "No assignments"
+        # Check PSoft for new assignments
+        psoft = csci2600.Csci2600()
+        set2600 = psoft.checkData()
+        psoft.addData()
 
-    else:
-        for key in set2600:
-            print "%s : %s" %(key, set2600[key])
+        for key in data:
+            emailer.Emailer(key, data[key], set2300, set2600, test).sendEmail()
 
-    print holder.Holder().email
-
-
+        print("Continuing to check once a day. CTRL + C to exit.")
+        time.sleep(86400)
 
 if __name__ == '__main__':
     main()
