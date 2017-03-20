@@ -1,3 +1,4 @@
+HW4 : http://www.cs.rpi.edu/~zaki/www-new/pmwiki.php/IntroAlgorithms/HW4
 HW2 : http://www.cs.rpi.edu/~zaki/www-new/pmwiki.php/IntroAlgorithms/HW2
 HW3 : http://www.cs.rpi.edu/~zaki/www-new/pmwiki.php/IntroAlgorithms/HW3
 HW1 : http://www.cs.rpi.edu/~zaki/www-new/pmwiki.php/IntroAlgorithms/HW1
@@ -8,3 +9,4 @@ Lab 2 : http://www.cs.rpi.edu/~zaki/www-new/pmwiki.php/IntroAlgorithms/Lab2
 Lab 3 : http://www.cs.rpi.edu/~zaki/www-new/pmwiki.php/IntroAlgorithms/Lab3
 Lab 4 : http://www.cs.rpi.edu/~zaki/www-new/pmwiki.php/IntroAlgorithms/Lab4
 Lab 5 : http://www.cs.rpi.edu/~zaki/www-new/pmwiki.php/IntroAlgorithms/Lab5
+Lab 6 : http://www.cs.rpi.edu/~zaki/www-new/pmwiki.php/IntroAlgorithms/Lab6

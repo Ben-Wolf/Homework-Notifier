@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+import holder
 import urllib
 import smtplib
 from email.MIMEMultipart import MIMEMultipart
@@ -47,6 +48,7 @@ if __name__ == '__main__':
     # Dictionary to hold and quickly access all homeworks and labs
     homeworks = {}
     labs = {}
+    x = holder.Holder()
 
     for url in links:
         url = str(url)
@@ -63,10 +65,10 @@ if __name__ == '__main__':
             labs[labNum] = labLink
 
     send = checkData(cache, homeworks, labs)
-    # addData(cache, homeworks, labs)
+    addData(cache, homeworks, labs)
 
-    fromaddr = "rpi.homework.notifier@gmail.com"
-    toaddr = "bwolfgns@gmail.com"
+    fromaddr = x.getEmail()
+    toaddr = "notreal"
     msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['To'] = toaddr
@@ -82,7 +84,7 @@ if __name__ == '__main__':
 
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
-    server.login(fromaddr, "checkhomework")
+    server.login(fromaddr, x.getPassword())
     text = msg.as_string()
     server.sendmail(fromaddr, toaddr, text)
     server.quit()
