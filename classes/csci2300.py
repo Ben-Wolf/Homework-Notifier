@@ -8,7 +8,7 @@ class Csci2300():
     # Gets all links on CSCI2600 page.
     links = soup.findAll('a')
     # Cache file
-    cache = "assets/cacheCSCI2300.txt"
+    cache = "assets/CSCI2300.txt"
 
     # Dictionary to hold and quickly access all homeworks and labs
     homeworks = {}

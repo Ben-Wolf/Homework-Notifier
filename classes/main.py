@@ -1,4 +1,4 @@
-import csci2300, shelve, sys, holder
+import csci2300, csci2600, shelve, sys, holder, emailer
 import smtplib
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
@@ -6,7 +6,11 @@ from email.MIMEText import MIMEText
 def main():
     # Check Algos for new assignments
     algos = csci2300.Csci2300()
-    sendSet = algos.checkData()
+    set2300 = algos.checkData()
+
+    # Check PSoft for new assignments
+    psoft = csci2600.Csci2600()
+    set2600 = psoft.checkData()
 
     if len(sys.argv) == 2:
         if (sys.argv[1] == "-add"):
@@ -23,6 +27,7 @@ def main():
                 else:
                     print "Invalid choice: '-1' to exit..."
 
+            # Open shelve to store new user data.
             x = shelve.open('users.db')
             data = x['data']
             data[email] = list(set(classes))    # lame check for duplicates
@@ -39,17 +44,18 @@ def main():
     data = x['data']
     x.close()
 
-    print data
+    for key in data:
+        emailer.Emailer(key, data[key], set2300, set2600).sendEmail()
 
     if len(data) == 0:
-        print "No users, please run with -add flag"
+        print "No users, please run with '-add' flag"
 
-    if len(sendSet) == 0:
+    if len(set2600) == 0:
         print "No assignments"
 
     else:
-        for key in sendSet:
-            print "%s : %s" %(key, sendSet[key])
+        for key in set2600:
+            print "%s : %s" %(key, set2600[key])
 
     print holder.Holder().email
 

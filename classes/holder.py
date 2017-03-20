@@ -1,3 +1,3 @@
 class Holder():
-    email = ""  # Host email here
-    password = ""   # Host password here
+    email = "rpi.homework.notifier@gmail.com"  # Host email here
+    password = "checkhomework"   # Host password here
