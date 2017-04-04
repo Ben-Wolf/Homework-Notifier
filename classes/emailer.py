@@ -25,6 +25,7 @@ class Emailer():
             print "Please put the email you plan to send updates from and the password in holder.py"
             sys.exit()
 
+        self.body = ""
         self.toaddr = email
         self.msg['to'] = email
         self.classes = classes
@@ -57,7 +58,7 @@ class Emailer():
         # Server code to send email
         if self.body == "":
             return None
-            
+
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
         server.login(self.fromaddr, self.password)

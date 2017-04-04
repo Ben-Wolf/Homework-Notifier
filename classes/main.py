@@ -33,6 +33,7 @@ def main():
             x = shelve.open('users.db')
             x['data'] = {}
             x.close()
+            sys.exit()
 
         # Get contents of database
         if (sys.argv[1] == "-get"):
